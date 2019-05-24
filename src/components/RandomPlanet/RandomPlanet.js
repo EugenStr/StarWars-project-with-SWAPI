@@ -12,22 +12,22 @@ export default class RandomPlanet extends React.Component {
 
   onPlanetLoaded = (planet) => {
       this.setState({planet, loading: false})
-      console.log(this.state);
   }
 
   componentDidMount() {
+    console.log('logged')
     const swapi = new SwapService();
     const showRandomPlanet = (timer) => {
         const randomNum = Math.floor(Math.random() * 25) + 2;
         swapi.getPlanet(randomNum)
           .then(this.onPlanetLoaded);
-        timer = setTimeout(showRandomPlanet, 15000);
+        timer = setTimeout(showRandomPlanet, 12000);
     }
     let timerId = setTimeout(() => {
       showRandomPlanet(timerId);
     }, 0)
   }
-
+    
   render() {
     return (
       <div className="aside-random-planet">
