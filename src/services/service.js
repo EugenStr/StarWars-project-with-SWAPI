@@ -20,20 +20,14 @@ export default class SwapService {
     return res.results.map(el => this._transformPlanet(el))
   }
 
-  async getStarship(id) {
-    const starship = await this.getResource(`/starships/${id}/`)
-    return this._transformStarship(starship)
-  }
+
 
   async getAllStarships() {
     const res = await this.getResource(`/starships/`);
     return res.results.map(el => this._transformStarship(el))
   }
 
-  async getPeople(id) {
-    const person = await this.getResource(`/people/${id}/`)
-    return this._transformPerson(person)
-  }
+  
 
   async getAllPeople() {
     const res = await this.getResource(`/people/`);

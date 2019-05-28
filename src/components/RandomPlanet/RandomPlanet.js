@@ -5,6 +5,8 @@ import SwapService from '../../services/service'
 import Spinner from '../Spinner/Spinner'
 
 export default class RandomPlanet extends React.Component {
+  swapi = new SwapService();
+
   state = {
     planet: {},
     loading: true
@@ -14,20 +16,21 @@ export default class RandomPlanet extends React.Component {
       this.setState({planet, loading: false})
   }
 
-  componentDidMount() {
-    console.log('logged')
-    const swapi = new SwapService();
-    const showRandomPlanet = (timer) => {
-        const randomNum = Math.floor(Math.random() * 25) + 2;
-        swapi.getPlanet(randomNum)
-          .then(this.onPlanetLoaded);
-        timer = setTimeout(showRandomPlanet, 12000);
-    }
-    let timerId = setTimeout(() => {
-      showRandomPlanet(timerId);
-    }, 0)
+  updatePlanet = () => {
+    const randomNum = Math.floor(Math.random() * 25) + 3;
+    this.swapi.getPlanet(randomNum)
+      .then(this.onPlanetLoaded);
   }
-    
+
+  componentDidMount() {
+    this.updatePlanet();
+    this.interval = setInterval(this.updatePlanet, 15000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
   render() {
     return (
       <div className="aside-random-planet">
