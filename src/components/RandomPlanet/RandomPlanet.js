@@ -24,18 +24,23 @@ export default class RandomPlanet extends React.Component {
 
   componentDidMount() {
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 15000)
+    this.interval = setInterval(this.updatePlanet, 5000);
+
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
   }
 
+
+
   render() {
+
+
     return (
       <div className="aside-random-planet">
         {this.state.loading ? <Spinner /> : <React.Fragment>
-                                              <img className="random-planet__img" alt='planet' src={`https://starwars-visualguide.com/assets/img/planets/${this.state.planet.id}.jpg`}/>
+                                              <img className="random-planet__img" alt='planet' src={this.state.planet.img}/>
                                               <PlanetInfo info={this.state.planet}/>
                                             </React.Fragment>}
       </div>

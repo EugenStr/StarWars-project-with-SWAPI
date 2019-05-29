@@ -1,5 +1,6 @@
 import React from 'react'
 import './ItemInfo.sass'
+import PropTypes from 'prop-types';
 
 const ItemInfo = ({listName, typeOfList, renderInfo}) => {
 
@@ -19,6 +20,17 @@ const ItemInfo = ({listName, typeOfList, renderInfo}) => {
     )
   }
 
+}
+
+
+ItemInfo.defaultProps = {
+  listName: null
+}
+
+ItemInfo.propTypes = {
+  listName: PropTypes.object,
+  typeOfList: PropTypes.string,
+  renderInfo: PropTypes.array
 }
 
 export default ItemInfo

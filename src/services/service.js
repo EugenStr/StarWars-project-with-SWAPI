@@ -12,7 +12,18 @@ export default class SwapService {
 
   async getPlanet(id) {
     const planet = await this.getResource(`/planets/${id}/`)
-    return this._transformPlanet(planet)
+    const resPlanet = this._transformPlanet(planet);
+    let img;
+    await fetch(`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`)
+      .then(res => {
+        if (res.status !== 404) {
+          img = res.url
+        } else {
+          img = 'https://www.rodeoticket.com/img/Race-Registration-Image-Not-Found.png'
+        }
+      })
+    resPlanet.img = img
+    return resPlanet
   }
 
   async getAllPlanets() {
@@ -27,7 +38,7 @@ export default class SwapService {
     return res.results.map(el => this._transformStarship(el))
   }
 
-  
+
 
   async getAllPeople() {
     const res = await this.getResource(`/people/`);
